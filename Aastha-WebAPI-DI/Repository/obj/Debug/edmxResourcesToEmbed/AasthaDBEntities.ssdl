@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AasthaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BillTable">
+    <Key>
+      <PropertyRef Name="BillId" />
+    </Key>
+    <Property Name="BillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalesCodeId" Type="int" />
+    <Property Name="Vat" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Discount" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="NetTotal" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="BillDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CategoryTable">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="100" />
+    <Property Name="Description" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="ProductTable">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryId" Type="int" />
+    <Property Name="ProductName" Type="varchar" MaxLength="100" />
+    <Property Name="Rate" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="QuantityInStock" Type="int" />
+    <Property Name="ThresholdValue" Type="int" />
+    <Property Name="MfgDate" Type="date" />
+    <Property Name="ExpDate" Type="date" />
+    <Property Name="Remarks" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="SalesCodeTable">
+    <Key>
+      <PropertyRef Name="SalesCodeId" />
+    </Key>
+    <Property Name="SalesCodeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="varchar" MaxLength="100" />
+    <Property Name="SalesDate" Type="date" />
+    <Property Name="CustomerEmail" Type="varchar" MaxLength="100" />
+    <Property Name="ContactNumber" Type="varchar" MaxLength="30" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="SalesTable">
+    <Key>
+      <PropertyRef Name="SalesId" />
+    </Key>
+    <Property Name="SalesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalesCodeId" Type="int" />
+    <Property Name="ProductId" Type="int" />
+    <Property Name="SalesQuantity" Type="float" />
+  </EntityType>
+  <EntityType Name="UserTable">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" />
+    <Property Name="Password" Type="varchar" MaxLength="100" />
+    <Property Name="UserType" Type="varchar" MaxLength="30" />
+    <Property Name="Role" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="varchar" MaxLength="40" />
+    <Property Name="IsActive" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__BillTable__Sales__4222D4EF">
+    <End Role="SalesCodeTable" Type="Self.SalesCodeTable" Multiplicity="0..1" />
+    <End Role="BillTable" Type="Self.BillTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesCodeTable">
+        <PropertyRef Name="SalesCodeId" />
+      </Principal>
+      <Dependent Role="BillTable">
+        <PropertyRef Name="SalesCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalesTabl__Sales__3F466844">
+    <End Role="SalesCodeTable" Type="Self.SalesCodeTable" Multiplicity="0..1" />
+    <End Role="SalesTable" Type="Self.SalesTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesCodeTable">
+        <PropertyRef Name="SalesCodeId" />
+      </Principal>
+      <Dependent Role="SalesTable">
+        <PropertyRef Name="SalesCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetSalesReportByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fromdate" Type="datetime" Mode="In" />
+    <Parameter Name="todate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="ManageBill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BillId" Type="int" Mode="In" />
+    <Parameter Name="SalesCodeId" Type="int" Mode="In" />
+    <Parameter Name="Vat" Type="numeric" Mode="In" />
+    <Parameter Name="Discount" Type="numeric" Mode="In" />
+    <Parameter Name="NetTotal" Type="numeric" Mode="In" />
+    <Parameter Name="Mode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ManageProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductId" Type="int" Mode="In" />
+    <Parameter Name="SubCategoryId" Type="int" Mode="In" />
+    <Parameter Name="ProductName" Type="varchar" Mode="In" />
+    <Parameter Name="Rate" Type="numeric" Mode="In" />
+    <Parameter Name="QuantityInStock" Type="int" Mode="In" />
+    <Parameter Name="ThresholdValue" Type="int" Mode="In" />
+    <Parameter Name="MfgDate" Type="date" Mode="In" />
+    <Parameter Name="ExpDate" Type="date" Mode="In" />
+    <Parameter Name="Mode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ManageSalesCodeTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SalesCodeId" Type="int" Mode="In" />
+    <Parameter Name="CustomerName" Type="varchar" Mode="In" />
+    <Parameter Name="SalesDate" Type="date" Mode="In" />
+    <Parameter Name="CustomerEmail" Type="varchar" Mode="In" />
+    <Parameter Name="ContactNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+    <Parameter Name="Mode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ManageSalesTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SalesId" Type="int" Mode="In" />
+    <Parameter Name="SalesCodeId" Type="int" Mode="In" />
+    <Parameter Name="ProductId" Type="varchar" Mode="In" />
+    <Parameter Name="SalesQuantity" Type="int" Mode="In" />
+    <Parameter Name="Mode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ManageUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="UserType" Type="varchar" Mode="In" />
+    <Parameter Name="Role" Type="varchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+    <Parameter Name="CreatedDate" Type="varchar" Mode="In" />
+    <Parameter Name="IsActive" Type="varchar" Mode="In" />
+    <Parameter Name="Mode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_ManageCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CategoryId" Type="int" Mode="In" />
+    <Parameter Name="CategoryName" Type="varchar" Mode="In" />
+    <Parameter Name="Description" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Mode" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="AasthaDBModelStoreContainer">
+    <EntitySet Name="BillTable" EntityType="Self.BillTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CategoryTable" EntityType="Self.CategoryTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductTable" EntityType="Self.ProductTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesCodeTable" EntityType="Self.SalesCodeTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesTable" EntityType="Self.SalesTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BillTable__Sales__4222D4EF" Association="Self.FK__BillTable__Sales__4222D4EF">
+      <End Role="SalesCodeTable" EntitySet="SalesCodeTable" />
+      <End Role="BillTable" EntitySet="BillTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalesTabl__Sales__3F466844" Association="Self.FK__SalesTabl__Sales__3F466844">
+      <End Role="SalesCodeTable" EntitySet="SalesCodeTable" />
+      <End Role="SalesTable" EntitySet="SalesTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

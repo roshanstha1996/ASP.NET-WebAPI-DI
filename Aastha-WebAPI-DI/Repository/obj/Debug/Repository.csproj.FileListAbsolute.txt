@@ -1,0 +1,10 @@
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\Repository\bin\Debug\Repository.dll.config
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\Repository\bin\Debug\Repository.dll
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\Repository\bin\Debug\Repository.pdb
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\Repository\bin\Debug\EntityFramework.dll
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\Repository\bin\Debug\EntityFramework.xml
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\Repository\obj\Debug\Repository.csprojAssemblyReference.cache
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\Repository\obj\Debug\Repository.csproj.CoreCompileInputs.cache
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\Repository\obj\Debug\Repository.csproj.CopyComplete
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\Repository\obj\Debug\Repository.dll
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\Repository\obj\Debug\Repository.pdb

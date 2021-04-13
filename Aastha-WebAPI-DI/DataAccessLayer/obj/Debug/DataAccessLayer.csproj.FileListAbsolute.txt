@@ -1,0 +1,10 @@
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\DataAccessLayer\bin\Debug\EntityFramework.dll
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\DataAccessLayer\bin\Debug\EntityFramework.xml
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\DataAccessLayer\obj\Debug\DataAccessLayer.csprojAssemblyReference.cache
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CopyComplete
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\Roshan\source\repos\ASP.NET-WebAPI-DI\Aastha-WebAPI-DI\DataAccessLayer\obj\Debug\DataAccessLayer.pdb

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AasthaDBModelStoreContainer" CdmEntityContainer="AasthaDBEntities">
+    <EntitySetMapping Name="BillTables">
+      <EntityTypeMapping TypeName="AasthaDBModel.BillTable">
+        <MappingFragment StoreEntitySet="BillTable">
+          <ScalarProperty Name="BillId" ColumnName="BillId" />
+          <ScalarProperty Name="SalesCodeId" ColumnName="SalesCodeId" />
+          <ScalarProperty Name="Vat" ColumnName="Vat" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="NetTotal" ColumnName="NetTotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryTables">
+      <EntityTypeMapping TypeName="AasthaDBModel.CategoryTable">
+        <MappingFragment StoreEntitySet="CategoryTable">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductTables">
+      <EntityTypeMapping TypeName="AasthaDBModel.ProductTable">
+        <MappingFragment StoreEntitySet="ProductTable">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="QuantityInStock" ColumnName="QuantityInStock" />
+          <ScalarProperty Name="ThresholdValue" ColumnName="ThresholdValue" />
+          <ScalarProperty Name="MfgDate" ColumnName="MfgDate" />
+          <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesCodeTables">
+      <EntityTypeMapping TypeName="AasthaDBModel.SalesCodeTable">
+        <MappingFragment StoreEntitySet="SalesCodeTable">
+          <ScalarProperty Name="SalesCodeId" ColumnName="SalesCodeId" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="SalesDate" ColumnName="SalesDate" />
+          <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesTables">
+      <EntityTypeMapping TypeName="AasthaDBModel.SalesTable">
+        <MappingFragment StoreEntitySet="SalesTable">
+          <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+          <ScalarProperty Name="SalesCodeId" ColumnName="SalesCodeId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="SalesQuantity" ColumnName="SalesQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubCategoryTables">
+      <EntityTypeMapping TypeName="AasthaDBModel.SubCategoryTable">
+        <MappingFragment StoreEntitySet="SubCategoryTable">
+          <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTables">
+      <EntityTypeMapping TypeName="AasthaDBModel.UserTable">
+        <MappingFragment StoreEntitySet="UserTable">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ManageBill" FunctionName="AasthaDBModel.Store.ManageBill" />
+    <FunctionImportMapping FunctionImportName="ManageProducts" FunctionName="AasthaDBModel.Store.ManageProducts" />
+    <FunctionImportMapping FunctionImportName="ManageSCT" FunctionName="AasthaDBModel.Store.ManageSCT" />
+    <FunctionImportMapping FunctionImportName="ManageST" FunctionName="AasthaDBModel.Store.ManageST" />
+    <FunctionImportMapping FunctionImportName="ManageUser" FunctionName="AasthaDBModel.Store.ManageUser" />
+    <FunctionImportMapping FunctionImportName="SP_ManageCategory" FunctionName="AasthaDBModel.Store.SP_ManageCategory" />
+    <FunctionImportMapping FunctionImportName="SP_ManageSubCategory" FunctionName="AasthaDBModel.Store.SP_ManageSubCategory" />
+  </EntityContainerMapping>
+</Mapping>
