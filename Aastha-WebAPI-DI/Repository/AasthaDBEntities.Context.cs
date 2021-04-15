@@ -35,6 +35,52 @@ namespace Repository
         public DbSet<SalesTable> SalesTables { get; set; }
         public DbSet<UserTable> UserTables { get; set; }
     
+        public virtual ObjectResult<GetSalesReportByDate_Result> GetSalesReportByDate(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("fromdate", fromdate) :
+                new ObjectParameter("fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("todate", todate) :
+                new ObjectParameter("todate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSalesReportByDate_Result>("GetSalesReportByDate", fromdateParameter, todateParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InsertUser(Nullable<int> userId, string username, string password, string role, string createdBy, Nullable<System.DateTime> createdDate, Nullable<bool> isActive)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var roleParameter = role != null ?
+                new ObjectParameter("Role", role) :
+                new ObjectParameter("Role", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            var createdDateParameter = createdDate.HasValue ?
+                new ObjectParameter("CreatedDate", createdDate) :
+                new ObjectParameter("CreatedDate", typeof(System.DateTime));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertUser", userIdParameter, usernameParameter, passwordParameter, roleParameter, createdByParameter, createdDateParameter, isActiveParameter);
+        }
+    
         public virtual int ManageBill(Nullable<int> billId, Nullable<int> salesCodeId, Nullable<decimal> vat, Nullable<decimal> discount, Nullable<decimal> netTotal, Nullable<int> mode)
         {
             var billIdParameter = billId.HasValue ?
@@ -163,47 +209,6 @@ namespace Repository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ManageSalesTable", salesIdParameter, salesCodeIdParameter, productIdParameter, salesQuantityParameter, modeParameter);
         }
     
-        public virtual int ManageUser(Nullable<int> userId, string userName, string password, string userType, string role, string createdBy, string createdDate, string isActive, Nullable<int> mode)
-        {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
-    
-            var userNameParameter = userName != null ?
-                new ObjectParameter("UserName", userName) :
-                new ObjectParameter("UserName", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            var userTypeParameter = userType != null ?
-                new ObjectParameter("UserType", userType) :
-                new ObjectParameter("UserType", typeof(string));
-    
-            var roleParameter = role != null ?
-                new ObjectParameter("Role", role) :
-                new ObjectParameter("Role", typeof(string));
-    
-            var createdByParameter = createdBy != null ?
-                new ObjectParameter("CreatedBy", createdBy) :
-                new ObjectParameter("CreatedBy", typeof(string));
-    
-            var createdDateParameter = createdDate != null ?
-                new ObjectParameter("CreatedDate", createdDate) :
-                new ObjectParameter("CreatedDate", typeof(string));
-    
-            var isActiveParameter = isActive != null ?
-                new ObjectParameter("IsActive", isActive) :
-                new ObjectParameter("IsActive", typeof(string));
-    
-            var modeParameter = mode.HasValue ?
-                new ObjectParameter("Mode", mode) :
-                new ObjectParameter("Mode", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ManageUser", userIdParameter, userNameParameter, passwordParameter, userTypeParameter, roleParameter, createdByParameter, createdDateParameter, isActiveParameter, modeParameter);
-        }
-    
         public virtual int SP_ManageCategory(Nullable<int> categoryId, string categoryName, string description, Nullable<int> mode)
         {
             var categoryIdParameter = categoryId.HasValue ?
@@ -225,30 +230,46 @@ namespace Repository
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ManageCategory", categoryIdParameter, categoryNameParameter, descriptionParameter, modeParameter);
         }
     
-        public virtual ObjectResult<GetSalesReportByDate_Result> GetSalesReportByDate(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        public virtual ObjectResult<Nullable<int>> UpdateUser(Nullable<int> userId, string username, string password, string role, string createdBy, Nullable<bool> isActive)
         {
-            var fromdateParameter = fromdate.HasValue ?
-                new ObjectParameter("fromdate", fromdate) :
-                new ObjectParameter("fromdate", typeof(System.DateTime));
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
     
-            var todateParameter = todate.HasValue ?
-                new ObjectParameter("todate", todate) :
-                new ObjectParameter("todate", typeof(System.DateTime));
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSalesReportByDate_Result>("GetSalesReportByDate", fromdateParameter, todateParameter);
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var roleParameter = role != null ?
+                new ObjectParameter("Role", role) :
+                new ObjectParameter("Role", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("IsActive", isActive) :
+                new ObjectParameter("IsActive", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UpdateUser", userIdParameter, usernameParameter, passwordParameter, roleParameter, createdByParameter, isActiveParameter);
         }
     
-        public virtual ObjectResult<GetSalesReportByDate_Result> SalesReportByDate(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        public virtual ObjectResult<Nullable<int>> ValidateUser(string username, string password)
         {
-            var fromdateParameter = fromdate.HasValue ?
-                new ObjectParameter("fromdate", fromdate) :
-                new ObjectParameter("fromdate", typeof(System.DateTime));
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
     
-            var todateParameter = todate.HasValue ?
-                new ObjectParameter("todate", todate) :
-                new ObjectParameter("todate", typeof(System.DateTime));
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSalesReportByDate_Result>("SalesReportByDate", fromdateParameter, todateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ValidateUser", usernameParameter, passwordParameter);
         }
     }
 }

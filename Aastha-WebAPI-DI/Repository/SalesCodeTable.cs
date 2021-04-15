@@ -14,20 +14,11 @@ namespace Repository
     
     public partial class SalesCodeTable
     {
-        public SalesCodeTable()
-        {
-            this.BillTables = new HashSet<BillTable>();
-            this.SalesTables = new HashSet<SalesTable>();
-        }
-    
         public int SalesCodeId { get; set; }
         public string CustomerName { get; set; }
         public Nullable<System.DateTime> SalesDate { get; set; }
         public string CustomerEmail { get; set; }
         public string ContactNumber { get; set; }
         public string Address { get; set; }
-    
-        public virtual ICollection<BillTable> BillTables { get; set; }
-        public virtual ICollection<SalesTable> SalesTables { get; set; }
     }
 }

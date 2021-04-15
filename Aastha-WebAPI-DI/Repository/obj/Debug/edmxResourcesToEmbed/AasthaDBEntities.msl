@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="AasthaDBModelStoreContainer" CdmEntityContainer="AasthaDBEntities">
+  <EntityContainerMapping StorageEntityContainer="AasthaDB_newModelStoreContainer" CdmEntityContainer="AasthaDBEntities">
     <EntitySetMapping Name="BillTables">
-      <EntityTypeMapping TypeName="AasthaDBModel.BillTable">
+      <EntityTypeMapping TypeName="AasthaDB_newModel.BillTable">
         <MappingFragment StoreEntitySet="BillTable">
-          <ScalarProperty Name="BillDate" ColumnName="BillDate" />
           <ScalarProperty Name="BillId" ColumnName="BillId" />
           <ScalarProperty Name="SalesCodeId" ColumnName="SalesCodeId" />
           <ScalarProperty Name="Vat" ColumnName="Vat" />
@@ -14,7 +13,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CategoryTables">
-      <EntityTypeMapping TypeName="AasthaDBModel.CategoryTable">
+      <EntityTypeMapping TypeName="AasthaDB_newModel.CategoryTable">
         <MappingFragment StoreEntitySet="CategoryTable">
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
@@ -23,7 +22,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProductTables">
-      <EntityTypeMapping TypeName="AasthaDBModel.ProductTable">
+      <EntityTypeMapping TypeName="AasthaDB_newModel.ProductTable">
         <MappingFragment StoreEntitySet="ProductTable">
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
@@ -38,7 +37,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SalesCodeTables">
-      <EntityTypeMapping TypeName="AasthaDBModel.SalesCodeTable">
+      <EntityTypeMapping TypeName="AasthaDB_newModel.SalesCodeTable">
         <MappingFragment StoreEntitySet="SalesCodeTable">
           <ScalarProperty Name="SalesCodeId" ColumnName="SalesCodeId" />
           <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
@@ -50,7 +49,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SalesTables">
-      <EntityTypeMapping TypeName="AasthaDBModel.SalesTable">
+      <EntityTypeMapping TypeName="AasthaDB_newModel.SalesTable">
         <MappingFragment StoreEntitySet="SalesTable">
           <ScalarProperty Name="SalesId" ColumnName="SalesId" />
           <ScalarProperty Name="SalesCodeId" ColumnName="SalesCodeId" />
@@ -60,42 +59,37 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserTables">
-      <EntityTypeMapping TypeName="AasthaDBModel.UserTable">
+      <EntityTypeMapping TypeName="AasthaDB_newModel.UserTable">
         <MappingFragment StoreEntitySet="UserTable">
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="UserType" ColumnName="UserType" />
           <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="ManageBill" FunctionName="AasthaDBModel.Store.ManageBill" />
-    <FunctionImportMapping FunctionImportName="ManageProducts" FunctionName="AasthaDBModel.Store.ManageProducts" />
-    <FunctionImportMapping FunctionImportName="ManageSalesCodeTable" FunctionName="AasthaDBModel.Store.ManageSalesCodeTable" />
-    <FunctionImportMapping FunctionImportName="ManageSalesTable" FunctionName="AasthaDBModel.Store.ManageSalesTable" />
-    <FunctionImportMapping FunctionImportName="ManageUser" FunctionName="AasthaDBModel.Store.ManageUser" />
-    <FunctionImportMapping FunctionImportName="SP_ManageCategory" FunctionName="AasthaDBModel.Store.SP_ManageCategory" />
-    <FunctionImportMapping FunctionImportName="GetSalesReportByDate" FunctionName="AasthaDBModel.Store.GetSalesReportByDate">
+    <FunctionImportMapping FunctionImportName="GetSalesReportByDate" FunctionName="AasthaDB_newModel.Store.GetSalesReportByDate">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="AasthaDBModel.GetSalesReportByDate_Result">
-          <ScalarProperty Name="BillId" ColumnName="BillId" />
+        <ComplexTypeMapping TypeName="AasthaDB_newModel.GetSalesReportByDate_Result">
           <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-          <ScalarProperty Name="NetTotal" ColumnName="NetTotal" />
+          <ScalarProperty Name="SalesDate" ColumnName="SalesDate" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="SalesReportByDate" FunctionName="AasthaDBModel.Store.GetSalesReportByDate">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="AasthaDBModel.GetSalesReportByDate_Result">
-          <ScalarProperty Name="BillId" ColumnName="BillId" />
-          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-          <ScalarProperty Name="NetTotal" ColumnName="NetTotal" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertUser" FunctionName="AasthaDB_newModel.Store.InsertUser" />
+    <FunctionImportMapping FunctionImportName="ManageBill" FunctionName="AasthaDB_newModel.Store.ManageBill" />
+    <FunctionImportMapping FunctionImportName="ManageProducts" FunctionName="AasthaDB_newModel.Store.ManageProducts" />
+    <FunctionImportMapping FunctionImportName="ManageSalesCodeTable" FunctionName="AasthaDB_newModel.Store.ManageSalesCodeTable" />
+    <FunctionImportMapping FunctionImportName="ManageSalesTable" FunctionName="AasthaDB_newModel.Store.ManageSalesTable" />
+    <FunctionImportMapping FunctionImportName="SP_ManageCategory" FunctionName="AasthaDB_newModel.Store.SP_ManageCategory" />
+    <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="AasthaDB_newModel.Store.UpdateUser" />
+    <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="AasthaDB_newModel.Store.ValidateUser" />
   </EntityContainerMapping>
 </Mapping>

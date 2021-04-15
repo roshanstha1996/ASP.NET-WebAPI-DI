@@ -16,9 +16,11 @@ namespace Aastha_WebAPI_DI
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
-            //whenever we call repo class, instanceof server class is automatically created
+            //whenever we call repo class, instance of server repository class is automatically created here
             container.RegisterType <IProductRepo, ProductRepo> ();
             container.RegisterType <IUserRepo, UserRepo> ();
+            container.RegisterType<ISalesRepo, SalesRepo>();
+            container.RegisterType<IBillRepo, BillRepo>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

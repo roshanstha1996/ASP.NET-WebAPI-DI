@@ -15,5 +15,23 @@ namespace Repository
                 return entities.UserTables.Any(user => user.UserName.Equals(username, StringComparison.OrdinalIgnoreCase) && user.Password == password);
             }
         }
+
+        public IEnumerable<UserTable> LoadAllUsers()
+        {
+            using (AasthaDBEntities entities = new AasthaDBEntities())
+            {
+                return entities.UserTables.ToList();
+            }
+        }
+
+        public UserTable SaveUser(UserTable user)
+        {
+            using (AasthaDBEntities entities = new AasthaDBEntities())
+            {
+                entities.UserTables.Add(user);
+                var newUserId = entities.SaveChanges();
+                return entities.UserTables.FirstOrDefault(u => u.UserId == newUserId);
+            }
+        }
     }
 }

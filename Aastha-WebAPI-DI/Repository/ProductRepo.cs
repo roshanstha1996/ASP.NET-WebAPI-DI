@@ -46,22 +46,5 @@ namespace Repository
                 return entity ;
             }
         }
-
-        public IEnumerable<GetSalesReportByDate_Result> GetSalesReportByDate(DateTime fromdate, DateTime todate)
-        {
-            using (AasthaDBEntities entities = new AasthaDBEntities())
-            {
-                var result = entities.GetSalesReportByDate(fromdate, todate).ToList();
-
-                if(result != null)
-                {
-                    return result;
-                }
-                else
-                {
-                    return new List<GetSalesReportByDate_Result>();
-                }
-            }
-        }
     }
 }

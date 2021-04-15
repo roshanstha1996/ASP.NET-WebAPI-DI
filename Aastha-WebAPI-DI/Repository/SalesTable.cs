@@ -18,7 +18,5 @@ namespace Repository
         public Nullable<int> SalesCodeId { get; set; }
         public Nullable<int> ProductId { get; set; }
         public Nullable<double> SalesQuantity { get; set; }
-    
-        public virtual SalesCodeTable SalesCodeTable { get; set; }
     }
 }

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Aastha_WEB.Models.ProductModel>
+
+@{
+    ViewBag.Title = "GetAllProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetAllProduct</h2>
+
+<p>
+    <a class="button" href="@Url.Action("CreateNewProduct", "Product", "")">Create New Product</a>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <th hidden>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th hidden>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantityInStock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThresholdValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MfgDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td hidden>
+            @Html.DisplayFor(modelItem => item.ProductId)
+        </td>
+        <td hidden>
+            @Html.DisplayFor(modelItem => item.CategoryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantityInStock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThresholdValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MfgDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
+            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
+        </td>
+    </tr>
+}
+
+</table>

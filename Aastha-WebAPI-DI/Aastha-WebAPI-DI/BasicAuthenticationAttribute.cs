@@ -14,6 +14,9 @@ namespace Aastha_WebAPI_DI
 {
     public class BasicAuthenticationAttribute : AuthorizationFilterAttribute
     {
+        //this is used when user passes their username and password on post request
+        //user credential is verified in web api, and if credential is verified, a session will accept 
+        //will request without having to validate the user again. If credetial isnot verified, web api wil return 401 unauthorized.
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             if(actionContext.Request.Headers.Authorization == null)

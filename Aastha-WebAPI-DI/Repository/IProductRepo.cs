@@ -13,6 +13,6 @@ namespace Repository
 
         ProductTable UpdateProduct(ProductTable product);
 
-        IEnumerable<GetSalesReportByDate_Result> GetSalesReportByDate(DateTime fromdate, DateTime todate);
+
     }
 }

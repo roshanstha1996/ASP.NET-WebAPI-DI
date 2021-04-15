@@ -9,5 +9,8 @@ namespace Repository
     public interface IUserRepo
     {
         bool Login(string username, string password);
+        IEnumerable<UserTable> LoadAllUsers();
+
+        UserTable SaveUser(UserTable user);
     }
 }

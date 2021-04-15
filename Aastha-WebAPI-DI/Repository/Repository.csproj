@@ -63,6 +63,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AasthaDBEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="BillRepo.cs" />
     <Compile Include="BillTable.cs">
       <DependentUpon>AasthaDBEntities.tt</DependentUpon>
     </Compile>
@@ -72,7 +73,9 @@
     <Compile Include="GetSalesReportByDate_Result.cs">
       <DependentUpon>AasthaDBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="IBillRepo.cs" />
     <Compile Include="IProductRepo.cs" />
+    <Compile Include="ISalesRepo.cs" />
     <Compile Include="IUserRepo.cs" />
     <Compile Include="ProductRepo.cs" />
     <Compile Include="ProductTable.cs">
@@ -82,6 +85,7 @@
     <Compile Include="SalesCodeTable.cs">
       <DependentUpon>AasthaDBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="SalesRepo.cs" />
     <Compile Include="SalesTable.cs">
       <DependentUpon>AasthaDBEntities.tt</DependentUpon>
     </Compile>

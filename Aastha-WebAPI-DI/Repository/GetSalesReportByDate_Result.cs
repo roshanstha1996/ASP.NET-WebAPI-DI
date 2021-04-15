@@ -13,8 +13,10 @@ namespace Repository
     
     public partial class GetSalesReportByDate_Result
     {
-        public int BillId { get; set; }
         public string CustomerName { get; set; }
-        public Nullable<decimal> NetTotal { get; set; }
+        public Nullable<System.DateTime> SalesDate { get; set; }
+        public string ProductName { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<double> Quantity { get; set; }
     }
 }

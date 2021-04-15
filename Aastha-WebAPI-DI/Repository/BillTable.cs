@@ -19,8 +19,5 @@ namespace Repository
         public Nullable<decimal> Vat { get; set; }
         public Nullable<decimal> Discount { get; set; }
         public Nullable<decimal> NetTotal { get; set; }
-        public Nullable<System.DateTime> BillDate { get; set; }
-    
-        public virtual SalesCodeTable SalesCodeTable { get; set; }
     }
 }

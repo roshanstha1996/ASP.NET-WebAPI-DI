@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AasthaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AasthaDB_newModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BillTable">
           <Key>
             <PropertyRef Name="BillId" />
@@ -14,7 +14,6 @@
           <Property Name="Vat" Type="numeric" Precision="18" Scale="2" />
           <Property Name="Discount" Type="numeric" Precision="18" Scale="2" />
           <Property Name="NetTotal" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="BillDate" Type="datetime" />
         </EntityType>
         <EntityType Name="CategoryTable">
           <Key>
@@ -65,39 +64,24 @@
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="100" />
           <Property Name="Password" Type="varchar" MaxLength="100" />
-          <Property Name="UserType" Type="varchar" MaxLength="30" />
           <Property Name="Role" Type="varchar" MaxLength="50" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
-          <Property Name="CreatedDate" Type="varchar" MaxLength="40" />
-          <Property Name="IsActive" Type="varchar" MaxLength="50" />
+          <Property Name="LoginDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
-        <Association Name="FK__BillTable__Sales__4222D4EF">
-          <End Role="SalesCodeTable" Type="Self.SalesCodeTable" Multiplicity="0..1" />
-          <End Role="BillTable" Type="Self.BillTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SalesCodeTable">
-              <PropertyRef Name="SalesCodeId" />
-            </Principal>
-            <Dependent Role="BillTable">
-              <PropertyRef Name="SalesCodeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SalesTabl__Sales__3F466844">
-          <End Role="SalesCodeTable" Type="Self.SalesCodeTable" Multiplicity="0..1" />
-          <End Role="SalesTable" Type="Self.SalesTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SalesCodeTable">
-              <PropertyRef Name="SalesCodeId" />
-            </Principal>
-            <Dependent Role="SalesTable">
-              <PropertyRef Name="SalesCodeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="GetSalesReportByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fromdate" Type="datetime" Mode="In" />
           <Parameter Name="todate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="Role" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedDate" Type="datetime" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
         </Function>
         <Function Name="ManageBill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BillId" Type="int" Mode="In" />
@@ -134,43 +118,36 @@
           <Parameter Name="SalesQuantity" Type="int" Mode="In" />
           <Parameter Name="Mode" Type="int" Mode="In" />
         </Function>
-        <Function Name="ManageUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserId" Type="int" Mode="In" />
-          <Parameter Name="UserName" Type="varchar" Mode="In" />
-          <Parameter Name="Password" Type="varchar" Mode="In" />
-          <Parameter Name="UserType" Type="varchar" Mode="In" />
-          <Parameter Name="Role" Type="varchar" Mode="In" />
-          <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
-          <Parameter Name="CreatedDate" Type="varchar" Mode="In" />
-          <Parameter Name="IsActive" Type="varchar" Mode="In" />
-          <Parameter Name="Mode" Type="int" Mode="In" />
-        </Function>
         <Function Name="SP_ManageCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CategoryId" Type="int" Mode="In" />
           <Parameter Name="CategoryName" Type="varchar" Mode="In" />
           <Parameter Name="Description" Type="varchar(max)" Mode="In" />
           <Parameter Name="Mode" Type="int" Mode="In" />
         </Function>
-        <EntityContainer Name="AasthaDBModelStoreContainer">
+        <Function Name="UpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="Role" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ValidateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="AasthaDB_newModelStoreContainer">
           <EntitySet Name="BillTable" EntityType="Self.BillTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryTable" EntityType="Self.CategoryTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductTable" EntityType="Self.ProductTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesCodeTable" EntityType="Self.SalesCodeTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesTable" EntityType="Self.SalesTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__BillTable__Sales__4222D4EF" Association="Self.FK__BillTable__Sales__4222D4EF">
-            <End Role="SalesCodeTable" EntitySet="SalesCodeTable" />
-            <End Role="BillTable" EntitySet="BillTable" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SalesTabl__Sales__3F466844" Association="Self.FK__SalesTabl__Sales__3F466844">
-            <End Role="SalesCodeTable" EntitySet="SalesCodeTable" />
-            <End Role="SalesTable" EntitySet="SalesTable" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="AasthaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="AasthaDB_newModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="BillTable">
           <Key>
             <PropertyRef Name="BillId" />
@@ -180,8 +157,6 @@
           <Property Name="Vat" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="NetTotal" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="SalesCodeTable" Relationship="Self.FK__BillTable__Sales__4222D4EF" FromRole="BillTable" ToRole="SalesCodeTable" />
-          <Property Name="BillDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="CategoryTable">
           <Key>
@@ -215,8 +190,6 @@
           <Property Name="CustomerEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ContactNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BillTables" Relationship="Self.FK__BillTable__Sales__4222D4EF" FromRole="SalesCodeTable" ToRole="BillTable" />
-          <NavigationProperty Name="SalesTables" Relationship="Self.FK__SalesTabl__Sales__3F466844" FromRole="SalesCodeTable" ToRole="SalesTable" />
         </EntityType>
         <EntityType Name="SalesTable">
           <Key>
@@ -226,7 +199,6 @@
           <Property Name="SalesCodeId" Type="Int32" />
           <Property Name="ProductId" Type="Int32" />
           <Property Name="SalesQuantity" Type="Double" />
-          <NavigationProperty Name="SalesCodeTable" Relationship="Self.FK__SalesTabl__Sales__3F466844" FromRole="SalesTable" ToRole="SalesCodeTable" />
         </EntityType>
         <EntityType Name="UserTable">
           <Key>
@@ -235,36 +207,12 @@
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UserType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="IsActive" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LoginDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <Association Name="FK__BillTable__Sales__4222D4EF">
-          <End Role="SalesCodeTable" Type="Self.SalesCodeTable" Multiplicity="0..1" />
-          <End Role="BillTable" Type="Self.BillTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SalesCodeTable">
-              <PropertyRef Name="SalesCodeId" />
-            </Principal>
-            <Dependent Role="BillTable">
-              <PropertyRef Name="SalesCodeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SalesTabl__Sales__3F466844">
-          <End Role="SalesCodeTable" Type="Self.SalesCodeTable" Multiplicity="0..1" />
-          <End Role="SalesTable" Type="Self.SalesTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SalesCodeTable">
-              <PropertyRef Name="SalesCodeId" />
-            </Principal>
-            <Dependent Role="SalesTable">
-              <PropertyRef Name="SalesCodeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="AasthaDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BillTables" EntityType="Self.BillTable" />
           <EntitySet Name="CategoryTables" EntityType="Self.CategoryTable" />
@@ -272,14 +220,19 @@
           <EntitySet Name="SalesCodeTables" EntityType="Self.SalesCodeTable" />
           <EntitySet Name="SalesTables" EntityType="Self.SalesTable" />
           <EntitySet Name="UserTables" EntityType="Self.UserTable" />
-          <AssociationSet Name="FK__BillTable__Sales__4222D4EF" Association="Self.FK__BillTable__Sales__4222D4EF">
-            <End Role="SalesCodeTable" EntitySet="SalesCodeTables" />
-            <End Role="BillTable" EntitySet="BillTables" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SalesTabl__Sales__3F466844" Association="Self.FK__SalesTabl__Sales__3F466844">
-            <End Role="SalesCodeTable" EntitySet="SalesCodeTables" />
-            <End Role="SalesTable" EntitySet="SalesTables" />
-          </AssociationSet>
+          <FunctionImport Name="GetSalesReportByDate" ReturnType="Collection(AasthaDB_newModel.GetSalesReportByDate_Result)">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsertUser" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Role" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+          </FunctionImport>
           <FunctionImport Name="ManageBill">
             <Parameter Name="BillId" Mode="In" Type="Int32" />
             <Parameter Name="SalesCodeId" Mode="In" Type="Int32" />
@@ -315,47 +268,41 @@
             <Parameter Name="SalesQuantity" Mode="In" Type="Int32" />
             <Parameter Name="Mode" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ManageUser">
-            <Parameter Name="UserId" Mode="In" Type="Int32" />
-            <Parameter Name="UserName" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="UserType" Mode="In" Type="String" />
-            <Parameter Name="Role" Mode="In" Type="String" />
-            <Parameter Name="CreatedBy" Mode="In" Type="String" />
-            <Parameter Name="CreatedDate" Mode="In" Type="String" />
-            <Parameter Name="IsActive" Mode="In" Type="String" />
-            <Parameter Name="Mode" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="SP_ManageCategory">
             <Parameter Name="CategoryId" Mode="In" Type="Int32" />
             <Parameter Name="CategoryName" Mode="In" Type="String" />
             <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="Mode" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetSalesReportByDate" ReturnType="Collection(AasthaDBModel.GetSalesReportByDate_Result)">
-            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
-            <Parameter Name="todate" Mode="In" Type="DateTime" />
+          <FunctionImport Name="UpdateUser" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Role" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="SalesReportByDate" ReturnType="Collection(AasthaDBModel.GetSalesReportByDate_Result)">
-            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
-            <Parameter Name="todate" Mode="In" Type="DateTime" />
+          <FunctionImport Name="ValidateUser" ReturnType="Collection(Int32)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetSalesReportByDate_Result">
-          <Property Type="Int32" Name="BillId" Nullable="false" />
           <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="100" />
-          <Property Type="Decimal" Name="NetTotal" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="SalesDate" Nullable="true" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Double" Name="Quantity" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AasthaDBModelStoreContainer" CdmEntityContainer="AasthaDBEntities">
+        <EntityContainerMapping StorageEntityContainer="AasthaDB_newModelStoreContainer" CdmEntityContainer="AasthaDBEntities">
           <EntitySetMapping Name="BillTables">
-            <EntityTypeMapping TypeName="AasthaDBModel.BillTable">
+            <EntityTypeMapping TypeName="AasthaDB_newModel.BillTable">
               <MappingFragment StoreEntitySet="BillTable">
-                <ScalarProperty Name="BillDate" ColumnName="BillDate" />
                 <ScalarProperty Name="BillId" ColumnName="BillId" />
                 <ScalarProperty Name="SalesCodeId" ColumnName="SalesCodeId" />
                 <ScalarProperty Name="Vat" ColumnName="Vat" />
@@ -365,7 +312,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CategoryTables">
-            <EntityTypeMapping TypeName="AasthaDBModel.CategoryTable">
+            <EntityTypeMapping TypeName="AasthaDB_newModel.CategoryTable">
               <MappingFragment StoreEntitySet="CategoryTable">
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
@@ -374,7 +321,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductTables">
-            <EntityTypeMapping TypeName="AasthaDBModel.ProductTable">
+            <EntityTypeMapping TypeName="AasthaDB_newModel.ProductTable">
               <MappingFragment StoreEntitySet="ProductTable">
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
@@ -389,7 +336,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SalesCodeTables">
-            <EntityTypeMapping TypeName="AasthaDBModel.SalesCodeTable">
+            <EntityTypeMapping TypeName="AasthaDB_newModel.SalesCodeTable">
               <MappingFragment StoreEntitySet="SalesCodeTable">
                 <ScalarProperty Name="SalesCodeId" ColumnName="SalesCodeId" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
@@ -401,7 +348,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SalesTables">
-            <EntityTypeMapping TypeName="AasthaDBModel.SalesTable">
+            <EntityTypeMapping TypeName="AasthaDB_newModel.SalesTable">
               <MappingFragment StoreEntitySet="SalesTable">
                 <ScalarProperty Name="SalesId" ColumnName="SalesId" />
                 <ScalarProperty Name="SalesCodeId" ColumnName="SalesCodeId" />
@@ -411,43 +358,38 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserTables">
-            <EntityTypeMapping TypeName="AasthaDBModel.UserTable">
+            <EntityTypeMapping TypeName="AasthaDB_newModel.UserTable">
               <MappingFragment StoreEntitySet="UserTable">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="ManageBill" FunctionName="AasthaDBModel.Store.ManageBill" />
-          <FunctionImportMapping FunctionImportName="ManageProducts" FunctionName="AasthaDBModel.Store.ManageProducts" />
-          <FunctionImportMapping FunctionImportName="ManageSalesCodeTable" FunctionName="AasthaDBModel.Store.ManageSalesCodeTable" />
-          <FunctionImportMapping FunctionImportName="ManageSalesTable" FunctionName="AasthaDBModel.Store.ManageSalesTable" />
-          <FunctionImportMapping FunctionImportName="ManageUser" FunctionName="AasthaDBModel.Store.ManageUser" />
-          <FunctionImportMapping FunctionImportName="SP_ManageCategory" FunctionName="AasthaDBModel.Store.SP_ManageCategory" />
-          <FunctionImportMapping FunctionImportName="GetSalesReportByDate" FunctionName="AasthaDBModel.Store.GetSalesReportByDate">
+          <FunctionImportMapping FunctionImportName="GetSalesReportByDate" FunctionName="AasthaDB_newModel.Store.GetSalesReportByDate" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="AasthaDBModel.GetSalesReportByDate_Result">
-                <ScalarProperty Name="BillId" ColumnName="BillId" />
+              <ComplexTypeMapping TypeName="AasthaDB_newModel.GetSalesReportByDate_Result">
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="NetTotal" ColumnName="NetTotal" />
+                <ScalarProperty Name="SalesDate" ColumnName="SalesDate" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SalesReportByDate" FunctionName="AasthaDBModel.Store.GetSalesReportByDate">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AasthaDBModel.GetSalesReportByDate_Result">
-                <ScalarProperty Name="BillId" ColumnName="BillId" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="NetTotal" ColumnName="NetTotal" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertUser" FunctionName="AasthaDB_newModel.Store.InsertUser" />
+          <FunctionImportMapping FunctionImportName="ManageBill" FunctionName="AasthaDB_newModel.Store.ManageBill" />
+          <FunctionImportMapping FunctionImportName="ManageProducts" FunctionName="AasthaDB_newModel.Store.ManageProducts" />
+          <FunctionImportMapping FunctionImportName="ManageSalesCodeTable" FunctionName="AasthaDB_newModel.Store.ManageSalesCodeTable" />
+          <FunctionImportMapping FunctionImportName="ManageSalesTable" FunctionName="AasthaDB_newModel.Store.ManageSalesTable" />
+          <FunctionImportMapping FunctionImportName="SP_ManageCategory" FunctionName="AasthaDB_newModel.Store.SP_ManageCategory" />
+          <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="AasthaDB_newModel.Store.UpdateUser" />
+          <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="AasthaDB_newModel.Store.ValidateUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

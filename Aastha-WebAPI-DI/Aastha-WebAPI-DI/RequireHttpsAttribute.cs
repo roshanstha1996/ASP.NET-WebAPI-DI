@@ -14,6 +14,7 @@ namespace Aastha_WebAPI_DI
     {
         public override void OnAuthorization(HttpActionContext actionContext)
         {
+            //actionContext provide us with request and response object
             if (actionContext.Request.RequestUri.Scheme != Uri.UriSchemeHttps)
             {
                 actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Found);

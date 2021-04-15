@@ -24,8 +24,8 @@ namespace Aastha_WebAPI_DI
             //config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
             //config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-            config.Filters.Add(new RequireHttpsAttribute());
-            config.Filters.Add(new BasicAuthenticationAttribute());
+            //config.Filters.Add(new RequireHttpsAttribute());
+            //config.Filters.Add(new BasicAuthenticationAttribute());
         }
     }
 }

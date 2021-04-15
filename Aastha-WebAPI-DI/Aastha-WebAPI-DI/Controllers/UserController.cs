@@ -9,6 +9,8 @@ using Repository;
 
 namespace Aastha_WebAPI_DI.Controllers
 {
+
+    //[BasicAuthentication]
     public class UserController : ApiController
     {
         private IUserRepo _iuserRepo;
@@ -20,17 +22,14 @@ namespace Aastha_WebAPI_DI.Controllers
             _iuserRepo = userRepo;
         }
 
+        [Route("api/loadallusers", Name = "LoadAllUsers")]
         [HttpGet]
         public IEnumerable<UserTable> LoadAllUsers()
         {
-            using (AasthaDBEntities entities = new AasthaDBEntities())
-            {
-                return entities.UserTables.ToList();
-            }
+            return _iuserRepo.LoadAllUsers();
         }
 
         [Route("api/Login", Name = "Login")]
-        [BasicAuthentication]
         [HttpGet]
         public bool Login(string username, string password)
         {
@@ -65,14 +64,15 @@ namespace Aastha_WebAPI_DI.Controllers
         {
             try
             {
-                using (AasthaDBEntities entities = new AasthaDBEntities())
+                if(_iuserRepo.SaveUser(user) != null)
                 {
-                    entities.UserTables.Add(user);
-                    entities.SaveChanges();
-
                     var message = Request.CreateResponse(HttpStatusCode.Created, user);
                     message.Headers.Location = new Uri(Request.RequestUri + user.UserId.ToString());
                     return message;
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "User not found to save!!");
                 }
             }
             catch (Exception ex)
@@ -123,7 +123,6 @@ namespace Aastha_WebAPI_DI.Controllers
                     {
                         entity.UserName = user.UserName;
                         entity.Password = user.Password;
-                        entity.UserType = user.UserType;
                         entity.Role = user.Role;
                         entity.CreatedBy = user.CreatedBy;
                         entity.CreatedDate = user.CreatedDate;
