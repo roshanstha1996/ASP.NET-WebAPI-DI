@@ -358,11 +358,14 @@ end
 
 GO
 
+insert into UserTable values ('admin','admin','Main','Super','Sadmin', GETDATE(), 'Active');
+GO
 
+insert into UserTable values ('roshan','roshan','Super','admin','admin', GETDATE(), 'Active');
+GO
 
+insert into CategoryTable values ('Drinks', 'This is drinks');
+GO
 
-
-
-
-
-
+insert into ProductTable values (1,'Coke',50,40,35,'2020-10-12','2022-01-01', 'This is from drinks departments');
+go
