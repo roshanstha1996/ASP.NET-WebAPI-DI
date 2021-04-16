@@ -24,7 +24,7 @@ Go
 Create Table ProductTable
 (
 ProductId int identity(1,1) primary key,
-CategoryId int,,
+CategoryId int,
 ProductName varchar(100),
 Rate numeric(18,2),
 QuantityInStock int,
@@ -58,7 +58,7 @@ Go
 Create Table BillTable
 (
 BillId int identity(1,1) primary key,
-SalesCodeId int,,
+SalesCodeId int,
 Vat numeric(18,2),
 Discount numeric(18,2),
 NetTotal numeric(18,2)
