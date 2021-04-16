@@ -7,7 +7,7 @@ UserName varchar(100),
 Password varchar(100),
 Role varchar(50),
 CreatedBy varchar(50),
-CreatedDate varchar(40),
+CreatedDate datetime,
 LoginDate datetime,
 IsActive bit
 )
